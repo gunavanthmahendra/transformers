@@ -1,0 +1,16 @@
+{% macro render_level(data, prefix) %}
+<ul class="list-group">
+  {% for key, value in data.items() %}
+  <li class="list-group-item">
+    {% if value is mapping %}
+      <a data-bs-toggle="collapse" href="#{{ prefix }}-{{ loop.index0 }}" role="button" aria-expanded="false" aria-controls="{{ prefix }}-{{ loop.index0 }}">{{ key }}</a>
+      <div class="collapse ms-3" id="{{ prefix }}-{{ loop.index0 }}">
+        {{ render_level(value, prefix ~ '-' ~ loop.index0) }}
+      </div>
+    {% else %}
+      <button class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#sopModal" data-sop="{{ value }}">{{ key }}</button>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endmacro %}

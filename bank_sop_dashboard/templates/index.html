@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bank SOP Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body { background-color: #800000; color: #ffffff; }
+      a, button { color: #ffffff; text-decoration: none; }
+      .list-group-item { background-color: transparent; border-color: #ffffff; }
+    </style>
+  </head>
+  <body>
+    <div class="container my-4">
+      <h1 class="mb-4">Bank SOP Dashboard</h1>
+      {% from '_macros.html' import render_level %}
+      {{ render_level(sop_data, 'level') }}
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="sopModal" tabindex="-1" aria-labelledby="sopModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="sopModalLabel">Standard Operating Procedure</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      var sopModal = document.getElementById('sopModal');
+      sopModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var sop = button.getAttribute('data-sop');
+        sopModal.querySelector('.modal-body').textContent = sop;
+      });
+    </script>
+  </body>
+</html>
